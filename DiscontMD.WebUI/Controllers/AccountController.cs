@@ -7,7 +7,7 @@ using YASop.AdminUI.Code;
 
 namespace DiscontMD.WebUI.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : DiscontController
     {
         public ActionResult Index()
         {
@@ -32,10 +32,10 @@ namespace DiscontMD.WebUI.Controllers
             if (user != null)
             {
                 new AuthHelper().Authenticate(user.Id);
-                return Redirect("/");
+                return Redirect("/backoffice");
             }
             dynamic res = new ExpandoObject();
-            res.Error = "Invalid email/password";
+            res.Error = "Неправильный e-mail/пароль";
             return View(res);
         }
 

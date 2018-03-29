@@ -123,8 +123,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Code\AuthHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BackofficeController.cs" />
+    <Compile Include="Controllers\DiscontController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -146,6 +147,7 @@
     <Content Include="Img\StartQuick1.jpg" />
     <Content Include="Img\StartQuick2.jpg" />
     <Content Include="Img\StartQuick3.jpg" />
+    <Content Include="Img\StartQuick4.jpg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -243,7 +245,6 @@
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Logoff.cshtml" />
-    <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper-utils.min.js.map" />
@@ -254,6 +255,8 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Account\Registration.cshtml" />
+    <Content Include="Views\Backoffice\Index.cshtml" />
+    <Content Include="Views\Backoffice\ViewCard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

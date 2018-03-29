@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Threading.Tasks;
 using DiscontMD.BusinessLogic.Presistense;
 using DiscontMD.BusinessLogic.Presistense.MSSQL;
 
@@ -11,6 +12,7 @@ namespace DiscontMD.BusinessLogic.DomainModel
         EveryNForFree,
         Accumulative
     }
+
     public class StoreSettings
     {
         
@@ -21,17 +23,24 @@ namespace DiscontMD.BusinessLogic.DomainModel
         public DiscountType Type { get; set; }
         public int? EneryN { get; set; }
         public string AccumulativeRules { get; set; }
+        public bool CountFirstTransaction{ get; set; }
+
     }
 
-    public class Store : DomainObject
+    public class Store : DomainObject, IWithEmbededProperty
     {
+        public Store()
+        {
+            Settings=new StoreSettings();
+        }
 
         [DBField(SqlDbType.NVarChar, 128)]
-        public string DOmainKeyword{ get; set; }
+        public string DomainKeyword{ get; set; }
 
         [DBField(SqlDbType.NVarChar, 0, false, true, typeof(StoreSettings))]
         public StoreSettings Settings { get; set; }
 
         private string SettingsJSON { get; set; }
+
     }
 }

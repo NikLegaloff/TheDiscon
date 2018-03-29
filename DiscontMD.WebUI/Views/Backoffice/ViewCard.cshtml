@@ -1,0 +1,122 @@
+﻿@using DiscontMD.BusinessLogic
+@model DiscontMD.BusinessLogic.DomainModel.Card
+@{
+    ViewBag.Title = "Информация по карте";
+}
+
+<div class="my-3 p-3 bg-white rounded box-shadow">
+@if (Model != null)
+{
+    <h3>Карта №@Request.QueryString["cardNum"]</h3>
+    <div class="row">
+        <div class="col-md-3">
+            <h5>Информация</h5>
+            <div style="margin-bottom: 20px;">
+                Текущая скидка<br/>
+                <input class="form-control text-success" readonly="readonly" type="text" value="@Registry.Current.Services.Store.DiscountFor(Model)%"/>
+            </div>
+            <div style="margin-bottom: 20px;">
+                Накопленно<br/>
+                <input class="form-control" readonly="readonly" type="text" value="@Model.Data.Amount"/>
+            </div>
+            <div style="margin-bottom: 20px;">
+                Дата активации<br/>
+                <input class="form-control" readonly="readonly" type="text" value="@Model.Data.ActivationDate.ToShortDateString()"/>
+            </div>
+        </div>
+
+        <div class="col-md-3 offset-md-1">
+            @using (Html.BeginForm("AddTransaction", "Backoffice"))
+            {
+                <input type="hidden" name="cardNum" value="@Model.Num"/>
+                <h5>Платёж по карте</h5>
+                <div style="margin-bottom: 20px;">
+                    Сумма
+                    <div class="input-group mb-3">
+                    <input class="form-control" type="number" maxlength="6" min="0" name="amount" /><div class="input-group-append">
+    <span class="input-group-text">.00р</span>
+</div>
+                </div>
+            </div>
+                <div style="margin-bottom: 20px;">
+                    Коментарий<br/>
+                    <input class="form-control" type="text" name="comment"/>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <input type="submit" onclick="return confirm('Добавить платёж?')" class="btn btn-block btn-outline-success" value="Добавить платёж"/>
+                </div>
+            }
+        </div>
+
+        <div class="col-md-3 offset-md-1">
+            @using (Html.BeginForm("UpdateCardDetails", "Backoffice"))
+            {
+                <h5>Личные данные</h5>
+                <div style="margin-bottom: 20px;">
+                    Имя владельца<br/>
+                    <input class="form-control" type="text" name="name" value="@Model.Data.ContactName"/>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    Email владельца<br/>
+                    <input class="form-control" type="text" name="email" value="@Model.Data.ContactAddress"/>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    Заметки<br/>
+                    <textarea class="form-control" name="comment" type="text">@Model.Data.Comments</textarea>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <input type="submit" onclick="return confirm('Автивировать карту?')" class="btn btn-block btn-outline-success" value="Сохранить изменения"/>
+                </div>
+            }
+        </div>
+    </div>
+    if (Model.Data.Items.Count > 0)
+    {
+        <div class="row">
+            <div class="col-md-11">
+
+                История платежей
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Дата</th>
+                            <th scope="col">Сумма</th>
+                            <th scope="col">Коментарий</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ var i = Model.Data.Items.Count; }
+                        @foreach (var row in Model.Data.Items)
+                        {
+                            <tr>
+                                <th scope="row">@(i--)</th>
+                                <td>@row.Date.ToShortDateString() @row.Date.ToShortTimeString()</td>
+                                <td>@row.Amount</td>
+                                <td>@row.Comment</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+       </div>
+    }
+}
+else
+{
+        using (Html.BeginForm("ViewCard", "Backoffice",FormMethod.Get))
+        {
+            <div class="col-md-4">
+                <h5 class="text-danger">Карта №@Request.QueryString["cardNum"] не найдена</h5>
+                <div style="margin-bottom: 20px;">
+                    Искать по другому номеру карты<br />
+                    <input class="form-control form-control-lg" type="number" maxlength="6" max="999999" value="@Request.QueryString["cardNum"]" autofocus placeholder="000 000" name="cardNum" />
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <input type="submit" class="btn btn-block btn-outline-success" value="Найти" />
+                </div>
+            </div>
+        }
+}
+                
+</div>

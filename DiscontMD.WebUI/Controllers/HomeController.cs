@@ -10,6 +10,7 @@ namespace DiscontMD.WebUI.Controllers
     {
         public ActionResult Index()
         {
+            
             return View();
         }
 

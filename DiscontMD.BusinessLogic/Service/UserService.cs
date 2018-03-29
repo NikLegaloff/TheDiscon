@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using DiscontMD.BusinessLogic.DomainModel;
 
-namespace DiscontMD.BusinessLogic.Service.Users
+namespace DiscontMD.BusinessLogic.Service
 {
     public class UserService : AbstractService
     {

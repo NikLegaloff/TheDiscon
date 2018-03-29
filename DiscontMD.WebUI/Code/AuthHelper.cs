@@ -8,6 +8,10 @@ using DiscontMD.BusinessLogic.DomainModel;
 
 namespace YASop.AdminUI.Code
 {
+    public class RequireLoginException : Exception
+    {
+        
+    }
     public class AuthHelper
     {
         private static string SessionKey = "LoggedUser";

@@ -10,12 +10,14 @@ namespace DiscontMD.BusinessLogic.Presistense
             Commands = GetDataProvider<CommandDTO>();
             Users = GetDataProvider<User>();
             Stores = GetDataProvider<Store>();
+            Cards = GetDataProvider<Card>();
             InitData();
         }
 
         public IDataProvider<CommandDTO> Commands { get; private set; }
         public IDataProvider<User> Users { get; private set; }
         public IDataProvider<Store> Stores { get; private set; }
+        public IDataProvider<Card> Cards { get; private set; }
 
         private void InitData()
         {

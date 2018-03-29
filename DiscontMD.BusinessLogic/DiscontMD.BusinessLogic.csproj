@@ -56,6 +56,8 @@
     <Compile Include="Bus\AbstractCommandHandler.cs" />
     <Compile Include="Bus\CommandBus.cs" />
     <Compile Include="Bus\ICommand.cs" />
+    <Compile Include="DomainModel\Card.cs" />
+    <Compile Include="DomainModel\CardPack.cs" />
     <Compile Include="DomainModel\CommandDTO.cs" />
     <Compile Include="DomainModel\Store.cs" />
     <Compile Include="DomainModel\User.cs" />
@@ -77,8 +79,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registry.cs" />
     <Compile Include="Service\AbstractService.cs" />
+    <Compile Include="Service\CardService.cs" />
     <Compile Include="Service\Services.cs" />
-    <Compile Include="Service\Users\UserService.cs" />
+    <Compile Include="Service\StoreService.cs" />
+    <Compile Include="Service\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Bus\Commands\" />

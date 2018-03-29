@@ -7,10 +7,12 @@
     <title>@ViewBag.Title - дисконтные карты</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+    <link href="~/Content/Site.css" rel="stylesheet" />
 </head>
 <body>
-<div class="bg-light" style="border-bottom: solid 1px #eee; margin-bottom: 20px;">
-    <nav class="navbar navbar-expand-md navbar-light bg-white fixed-top">
+<div class="bg-light" style="border-bottom: solid 1px #eee; margin-bottom: 20px; ">
+    <nav class="navbar navbar-expand-md navbar-light bg-white ">
+        <div class="container">
         <a class="navbar-brand" href="/">Дисконт MD</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="true" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -19,27 +21,37 @@
         <div class="navbar-collapse collapse show" id="navbarsExampleDefault" style="">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Наши партнёры</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Disabled</a>
+                    <a class="nav-link" href="#">Партнёры</a>
                 </li>
                 @if (new AuthHelper().IsAuthenticated) {
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="ddlMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Мой оффис</a>
+                        <a class="nav-link dropdown-toggle" href="#" id="ddlMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Мой офис</a>
                         <div class="dropdown-menu" aria-labelledby="ddlMenu1">
+                            <a class="dropdown-item" href="/backoffice/">Главная</a>
                             <a class="dropdown-item" href="#">Активированные карты</a>
                             <a class="dropdown-item" href="#">История продаж</a>
                             <a class="dropdown-item" href="#">Настройки магазина</a>
                             <a class="dropdown-item" href="#">Правила дисконта</a>
                         </div>
                     </li>
+                    <li>
+                        @using (Html.BeginForm("ViewCard", "Backoffice", FormMethod.Get))
+                        {
+
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="cardNum" placeholder="000 000" style="width: 90px;">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" onclick="this.form.submit();" type="button"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        }
+                    </li>
                 }
             </ul>
 @if (!new AuthHelper().IsAuthenticated)
 {
 
-    <div class=" my-2 my-lg-0">
+    <div class="my-2 my-lg-0">
         <a class="btn btn-outline-success" href="/Account/Registration">Регистрация</a>
         <a class="btn btn-outline-primary" href="/Account/Login">Войти</a>
     </div>
@@ -47,18 +59,19 @@
 else
 {
 
-    <div class=" my-2 my-lg-0">
-        <a class="" href="/Account/Registration"> <i class="fa fa-user"></i> @(new AuthHelper().CurrentUser().Email)</a> &nbsp;
-        <a class="btn btn-outline-warning" href="/Account/Logout">Выход</a>
+    <div class="my-2 my-lg-0">
+   <a class="" href="/Account/Registration"> <i class="fa fa-user"></i> @(new AuthHelper().CurrentUser().Email.Split('@')[0])</a> &nbsp;
+        <a class="btn btn-outline-warning" href="/Account/LogOff">Выход</a>
     </div>
 
 }
+        </div>
         </div>
     </nav>
     
 
 
-    <main role="main" class="container" style="padding: 4.5rem 1.5rem 3rem 1.5rem;">
+    <main role="main" class="container" style="padding: 0 0rem 2rem 0rem;">
         @RenderBody()
     </main>
 </div>
@@ -68,7 +81,7 @@ else
         <p class="float-right">
             <a href="#">Наверх</a>
         </p>
-        <p>&copy; 2017-2018 Дисконт M.D></p>
+        <p>&copy; 2017-2018 Дисконт M.D</p>
         <p>Есть вопросы? <a href="#">Свяжитесь с нами</a>.
         </p>
     </div>
