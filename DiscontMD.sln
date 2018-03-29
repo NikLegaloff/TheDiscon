@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscontMD.BusinessLogic", "DiscontMD.BusinessLogic\DiscontMD.BusinessLogic.csproj", "{687C9DEC-90DC-466C-806A-7CD565F21392}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscontMD.BusinessLogic", "DiscontMD.BusinessLogic\DiscontMD.BusinessLogic.csproj", "{FCCD7D08-F2E7-4631-A212-7D538BC8DF92}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscontMD.WebUI", "DiscontMD.WebUI\DiscontMD.WebUI.csproj", "{F6A0B6A7-4710-4DD8-8669-38D4AA57744A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{687C9DEC-90DC-466C-806A-7CD565F21392}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{687C9DEC-90DC-466C-806A-7CD565F21392}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{687C9DEC-90DC-466C-806A-7CD565F21392}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{687C9DEC-90DC-466C-806A-7CD565F21392}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCCD7D08-F2E7-4631-A212-7D538BC8DF92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCCD7D08-F2E7-4631-A212-7D538BC8DF92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCCD7D08-F2E7-4631-A212-7D538BC8DF92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCCD7D08-F2E7-4631-A212-7D538BC8DF92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6A0B6A7-4710-4DD8-8669-38D4AA57744A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6A0B6A7-4710-4DD8-8669-38D4AA57744A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6A0B6A7-4710-4DD8-8669-38D4AA57744A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6A0B6A7-4710-4DD8-8669-38D4AA57744A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

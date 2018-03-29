@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Login";
+}
+<div class="my-3 p-3 bg-white rounded box-shadow col-md-4 offset-md-4">
+    <h4 class="border-bottom pb-2 mb-0 ">Вход в оффис</h4>
+    <div class="pt-3">
+        @using (Html.BeginForm("Login", "Account"))
+        {
+            <div style="margin-bottom: 20px;"><input class="form-control" type="text" placeholder="Email" name="email"/>
+            </div>
+            <div style="margin-bottom: 20px;"><input class="form-control" type="password" placeholder="Пароль" name="pass"/>
+            </div>
+            <div style="margin-bottom: 20px;"><input type="submit" class="btn btn-block btn-outline-primary" value="Войти"/>
+            </div>
+            <div class="warning">@Model.Error</div>
+        }
+    </div>
+</div>
