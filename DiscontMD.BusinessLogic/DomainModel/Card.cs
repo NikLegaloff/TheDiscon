@@ -41,7 +41,7 @@ namespace DiscontMD.BusinessLogic.DomainModel
 
     }
 
-    public class Card : DomainObject, IWithEmbededProperty
+    public class Card : DomainObject, IWithEmbededProperty, IComparable<Card>
     {
         public Card()
         {
@@ -57,6 +57,9 @@ namespace DiscontMD.BusinessLogic.DomainModel
         public CardData Data { get; set; }
         private string DataJSON { get; set; }
         public Task<Store> Store => Registry.Current.Data.Stores.Find(StoreId);
-
+        public int CompareTo(Card other)
+        {
+            return -Data.ActivationDate.CompareTo(other.Data.ActivationDate);
+        }
     }
 }

@@ -15,7 +15,7 @@ namespace DiscontMD.WebUI.Controllers
         }
         public ActionResult LogOff()
         {
-            new AuthHelper().LogOff();
+             Registry.Current.Services.User.LogOff();
             return Redirect("/");
         }
         [AcceptVerbs(HttpVerbs.Get)]
@@ -31,7 +31,7 @@ namespace DiscontMD.WebUI.Controllers
             var user = await Registry.Current.Services.User.Get(email, pass);
             if (user != null)
             {
-                new AuthHelper().Authenticate(user.Id);
+                Registry.Current.Services.User.Authenticate(user.Id);
                 return Redirect("/backoffice");
             }
             dynamic res = new ExpandoObject();

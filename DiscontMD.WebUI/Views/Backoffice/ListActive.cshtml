@@ -1,0 +1,52 @@
+﻿@using DiscontMD.BusinessLogic
+@model DiscontMD.BusinessLogic.DomainModel.Card[]
+@{
+    ViewBag.Title = "Информация по карте";
+}
+
+<div class="my-3 p-3 bg-white rounded box-shadow">
+@if (Model != null)
+{
+    <h3><a href="/Backoffice"><i class="fa fa-angle-double-left"></i></a> Aктивные карты</h3>
+    if (Model.Length > 0)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Номер</th>
+                            <th scope="col">Дата активации</th>
+                            <th scope="col">Сумма</th>
+                            <th scope="col">%</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ var i = Model.Length; }
+                        @foreach (var row in Model)
+                        {
+                            <tr>
+                                <th scope="row">@(i--)</th>
+                                <td><a href="/Backoffice/ViewCard?cardNum=@row.Num">@row.Num</a></td>
+                                <td>@row.Data.ActivationDate.ToShortDateString() @row.Data.ActivationDate.ToShortTimeString()</td>
+                                <td>@row.Data.Amount</td>
+                                <td>@Registry.Current.Services.Store.DiscountFor(row)%</td>
+                                <td>@row.Data.ContactName @row.Data.ContactAddress</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+       </div>
+    }
+}
+else
+{
+            <div class="col-md-4">
+                <h5 class="text-danger"><a href="/Backoffice"><i class="fa fa-angle-double-left"></i></a> Нет активированных карт</h5>
+            </div>
+}
+                
+</div>

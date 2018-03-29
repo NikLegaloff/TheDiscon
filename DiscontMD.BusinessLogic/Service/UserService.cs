@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using DiscontMD.BusinessLogic.DomainModel;
 
@@ -32,5 +33,25 @@ namespace DiscontMD.BusinessLogic.Service
             var users = await Registry.Current.Data.Users.Select(" where Email=@email", new {email});
             return users.Length == 0 ? null : users[0];
         }
+
+        private static string SessionKey = "LoggedUser";
+        public bool IsAuthenticated => (Registry.Current.Infrastructure.Common.GetFromSession(SessionKey) as string) != null;
+
+
+        public void LogOff()
+        {
+            Registry.Current.Infrastructure.Common.PutInSession(SessionKey, null);
+        }
+        public void Authenticate(Guid id)
+        {
+            Registry.Current.Infrastructure.Common.PutInSession(SessionKey, id.ToString()); 
+        }
+        public User CurrentUser()
+        {
+            var s = Registry.Current.Infrastructure.Common.GetFromSession(SessionKey) as string;
+            //if (string.IsNullOrWhiteSpace(s)) HttpContext.Current.Response.Redirect("/Account/Login/");
+            return AsyncHelpers.RunSync(() => Registry.Current.Data.Users.Find(new Guid(s)));
+        }
+
     }
 }

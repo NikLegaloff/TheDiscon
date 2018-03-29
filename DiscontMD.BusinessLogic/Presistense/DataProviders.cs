@@ -11,6 +11,8 @@ namespace DiscontMD.BusinessLogic.Presistense
             Users = GetDataProvider<User>();
             Stores = GetDataProvider<Store>();
             Cards = GetDataProvider<Card>();
+            AvailableCards = GetDataProvider<AvailableCard>();
+            CardPacks = GetDataProvider<CardPack>();
             InitData();
         }
 
@@ -18,6 +20,8 @@ namespace DiscontMD.BusinessLogic.Presistense
         public IDataProvider<User> Users { get; private set; }
         public IDataProvider<Store> Stores { get; private set; }
         public IDataProvider<Card> Cards { get; private set; }
+        public IDataProvider<AvailableCard> AvailableCards { get; private set; }
+        public IDataProvider<CardPack> CardPacks { get; private set; }
 
         private void InitData()
         {

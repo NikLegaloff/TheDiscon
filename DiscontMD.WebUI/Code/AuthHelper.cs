@@ -12,7 +12,7 @@ namespace YASop.AdminUI.Code
     {
         
     }
-    public class AuthHelper
+    public class AuthHelper2
     {
         private static string SessionKey = "LoggedUser";
         public bool IsAuthenticated => Session[SessionKey] != null;

@@ -1,0 +1,262 @@
+﻿@model DiscontMD.BusinessLogic.DomainModel.Store
+
+@{
+    ViewBag.Title = "Настройки магазина";
+}
+@section scripts {
+
+    <script>
+
+        function typeChanged() {
+            if ($("#ddlType").val() == "1")
+            {
+                $("#pType1").hide();
+                $("#pType2").show();
+            }else 
+            {
+                $("#pType2").hide();
+                $("#pType1").show();
+            }
+        }
+
+    </script>
+
+}
+<div class="my-3 p-3 bg-white rounded box-shadow">
+    <div class="pt-3">
+        @using (Html.BeginForm("CreateStore", "Backoffice"))
+        {
+            <h3>Настройка магазина и дисконта</h3>
+                <div class="row">
+                <div class="col-md-5 ">
+                    <p>Название магазина<br/>
+                        <input class="form-control" required="true" type="text" name="name" value="" />
+                    </p>  
+                    <div class="mb-3">
+                        Имя сайта(латинскими буквами)
+                        <div class="input-group mb-1">
+                            <div class="input-group-prepend"><span class="input-group-text">http://</span></div>
+                            <input type="text" required="true" class="form-control" name="domain">
+                            <div class="input-group-append"><span class="input-group-text" id="basic-addon2">.diskont-md.com</span></div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-5 ">
+                    <p>
+                        Вид дисконта
+                        <select id="ddlType" name="type"  required="true" class="form-control" onchange="typeChanged()">
+                            <option selected="selected" value=""></option>
+                            <option value="0">Накопительная скидка</option>
+                            <option value="1">Каждая N услуга бесплатно</option>
+                        </select>
+                    </p>
+                    <div id="pType1" style="display: none;">
+                        <div style="margin-bottom: 20px;">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">От</span>
+                                        </div><input class="form-control  numberbox" type="number" min="0" value="0" name="prices.From0" />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">руб.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="input-group mb-3">
+                                        <input class="form-control  numberbox" type="number" min="0" value="2" name="prices.Amount0" />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">От</span>
+                                        </div><input class="form-control  numberbox" type="number" min="0" value="500" name="prices.From1"/>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">руб.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="input-group mb-3">
+                                        <input class="form-control  numberbox" type="number" min="0" value="3" name="prices.Amount1"  />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">От</span>
+                                        </div><input class="form-control  numberbox" type="number" min="0" value="1000" name="prices.From2" />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">руб.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="input-group mb-3">
+                                        <input class="form-control  numberbox" type="number" min="0" value="4" name="prices.Amount2" />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">От</span>
+                                        </div><input class="form-control  numberbox" type="number" min="0" value="2500" name="prices.From3" />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">руб.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="input-group mb-3">
+                                        <input class="form-control  numberbox" type="number" min="0" value="5" name="prices.Amount3"/>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">От</span>
+                                        </div><input class="form-control  numberbox" type="number" min="0" value="5000" name="prices.From4" />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">руб.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="input-group mb-3">
+                                        <input class="form-control  numberbox" type="number" min="0" value="6" name="prices.Amount4" />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">От</span>
+                                        </div><input class="form-control  numberbox" type="number" min="0" value="7500" name="prices.From5"  />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">руб.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="input-group mb-3">
+                                        <input class="form-control  numberbox" type="number" min="0" value="7" name="prices.Amount5" />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">От</span>
+                                        </div><input class="form-control  numberbox" type="number" min="0" value="10000" name="prices.From6" />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">руб.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="input-group mb-3">
+                                        <input class="form-control  numberbox" type="number" min="0" value="8" name="prices.Amount6" />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">От</span>
+                                        </div><input class="form-control  numberbox" type="number" min="0" value="15000" name="prices.From7" />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">руб.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="input-group mb-3">
+                                        <input class="form-control  numberbox" type="number" min="0" value="9" name="prices.Amount7" />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">От</span>
+                                        </div><input class="form-control  numberbox" type="number" min="0" value="20000" name="prices.From8"  />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">руб.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="input-group mb-3">
+                                        <input class="form-control  numberbox" type="number" min="0" value="10" name="prices.Amount8" />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display: none" id="pType2">
+                        <div style="margin-bottom: 20px;">
+                            <div class="lead">
+                                Каждая <input type="number" class="form-control numberbox" style="width: 60px; display: inline-block" name="everyN" value="10" /> услуга бесплатно
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div style="margin-bottom: 20px;">
+                                    <input type="submit" class="btn btn-block btn-outline-success" value="Далее" />
+                                </div>
+                            </div>
+                        </div>
+                        }
+
+                    </div>
+                </div>
+
+

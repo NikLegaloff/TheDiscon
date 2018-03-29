@@ -9,20 +9,36 @@ namespace DiscontMD.BusinessLogic.DomainModel
 {
     public enum DiscountType
     {
-        EveryNForFree,
-        Accumulative
+        Accumulative, EveryNForFree
     }
 
+    public class PriceRule
+    {
+        public PriceRule() { }
+
+        public PriceRule(int @from, int discount)
+        {
+            From = @from;
+            Discount = discount;
+        }
+
+        public  int From { get; set; }
+        public  int Discount { get; set; }
+    }
     public class StoreSettings
     {
-        
+        public StoreSettings()
+        {
+            AccumulativeRules=new List<PriceRule>();
+        }
+
         public string ShortName{ get; set; }
         public string DiscountDescription{ get; set; }
         public string NewsLine{ get; set; }
         public string Contacts{ get; set; }
         public DiscountType Type { get; set; }
         public int? EneryN { get; set; }
-        public string AccumulativeRules { get; set; }
+        public List<PriceRule> AccumulativeRules { get; set; }
         public bool CountFirstTransaction{ get; set; }
 
     }

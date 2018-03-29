@@ -1,54 +1,55 @@
-﻿@{
+﻿@model DiscontMD.WebUI.Models.BackofficeDash
+@{
     ViewBag.Title = "Мой офис";
 
 }
 
 <div class="my-3 p-3 bg-white rounded box-shadow">
     <div class="pt-3">
-        <div class="row">
-            <div class="col-md-3">
-                @using (Html.BeginForm("ViewCard", "Backoffice",FormMethod.Get))
+       <div class="row">
+            <div class="col-md-3  mb-4">
+                @using (Html.BeginForm("ViewCard", "Backoffice", FormMethod.Get))
                 {
                     <h5>Информация по карте</h5>
                     <div style="margin-bottom: 20px;">
-                        Номер карты<br />
-                        <input class="form-control form-control-lg" type="number" maxlength="6" max="999999" placeholder="000 000" name="cardNum" />
+                        Номер карты<br/>
+                        <input  required="true"  class="form-control form-control-lg" type="number" maxlength="6" max="999999" placeholder="000 000" name="cardNum"/>
                     </div>
                     <div style="margin-bottom: 20px;">
-                        <input type="submit" class="btn btn-block btn-outline-success" value="Найти" />
+                        <input type="submit" class="btn btn-block btn-outline-success" value="Найти"/>
                     </div>
-                    <div class="warning">@(Model?.Error)</div>
                 }
             </div>
-             <div class="col-md-3">
+            <div class="col-md-3  mb-4">
                 @using (Html.BeginForm("ActivateCard", "Backoffice"))
                 {
                     <h5>Активация карты</h5>
                     <div style="margin-bottom: 20px;">
-                        Номер карты<br />
-                        <input class="form-control form-control-lg" type="number" placeholder="000 000" maxlength="6" max="999999" min="0" name="cardNum"/>
+                        Номер карты<br/>
+                        <input class="form-control form-control-lg"  required="true"  type="number" placeholder="000 000" maxlength="6" max="999999" min="0" name="cardNum"/>
                     </div>
                     <div style="margin-bottom: 20px;">
-                        <input type="submit" onclick="return confirm('Автивировать карту?')" class="btn btn-block btn-outline-success" value="Активировать" />
+                        <input type="submit"  class="btn btn-block btn-outline-success" value="Активировать"/>
                     </div>
-                    <div class="warning">@(Model?.Error)</div>
                 }
             </div>
-             <div class="col-md-3">
+            <div class="col-md-3 mb-4">
                 @using (Html.BeginForm("ActivateCard", "Backoffice"))
                 {
-                    <h5>Статистика</h5>
-                    <div style="margin-bottom: 20px;">
-                        Карт активно<br />
-                        <input class="form-control" readonly="readonly" type="number" value="173"/>
-                    </div>
-                    <div style="margin-bottom: 20px;">
-                        Неактивированых карт<br />
-                        <input class="form-control" readonly="readonly" type="number" value="227"/>
-                    </div>
-                    <div style="margin-bottom: 20px;">
-                        Всего карт<br />
-                        <input class="form-control" readonly="readonly" type="number" value="300"/>
+                    <h5>Дисконтные карты</h5>
+                    <div class="mb-1 lead">Активные <a class="font-weight-bold" href="/Backoffice/ListActive/">@Model.ActiveCards <i class="fa fa-angle-double-right"></i></a></div>
+                    <div  class="mb-1 lead">Неактивированные <a class="font-weight-bold" href="#">@Model.AvailableCards <i class="fa fa-angle-double-right"></i></a></div>
+                    <div class="mb-1 lead">Всего карт <a class="font-weight-bold">@Model.Total</a></div>
+                }
+            </div>
+            <div class="col-md-3 mb-4">
+                @using (Html.BeginForm("ActivateCard", "Backoffice"))
+                {
+                    <h5>Управление сайтом</h5>
+                    <div class="list-group">
+                            <a href="/Backoffice/EditStore/" class="list-group-item list-group-item-action">Анонс и контакты</a>
+                            <a href="#" class="list-group-item list-group-item-action disabled">Внешний вид</a>
+                        
                     </div>
                 }
             </div>
