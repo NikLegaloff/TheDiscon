@@ -1,0 +1,27 @@
+﻿@model DiscontMD.BusinessLogic.DomainModel.Store[]
+@{
+    ViewBag.Title = "Мой офис";
+
+}
+<div class="my-3 p-3 bg-white rounded box-shadow">
+    <div class="pt-3">
+       <div class="row">
+            <div class="col-md-6  mb-4">
+                @using (Html.BeginForm("SelectStore", "Admin", FormMethod.Get))
+                {
+                   <div style="margin-bottom: 20px;">
+                       <select name="storeId">
+                           @foreach (var o in Model)
+                           {
+                            <option value="@o.Id">@o.Name @o.Domain</option>
+                           }
+                       </select>
+                   </div>
+                    <div style="margin-bottom: 20px;">
+                        <input type="submit" class="btn btn-block btn-outline-success" value="Перейти"/>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

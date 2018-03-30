@@ -1,5 +1,4 @@
-﻿@model DiscontMD.BusinessLogic.DomainModel.Store
-
+﻿
 @{
     ViewBag.Title = "Настройки магазина";
 }
@@ -27,6 +26,7 @@
         @using (Html.BeginForm("CreateStore", "Backoffice"))
         {
             <h3>Настройка магазина и дисконта</h3>
+            <div class="alert-danger">@(Model.Error)</div>
                 <div class="row">
                 <div class="col-md-5 ">
                     <p>Название магазина<br/>

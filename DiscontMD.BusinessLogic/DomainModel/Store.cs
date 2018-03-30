@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Threading.Tasks;
 using DiscontMD.BusinessLogic.Presistense;
 using DiscontMD.BusinessLogic.Presistense.MSSQL;
 
@@ -16,9 +14,9 @@ namespace DiscontMD.BusinessLogic.DomainModel
     {
         public PriceRule() { }
 
-        public PriceRule(int @from, int discount)
+        public PriceRule(int from, int discount)
         {
-            From = @from;
+            From = from;
             Discount = discount;
         }
 
@@ -32,7 +30,6 @@ namespace DiscontMD.BusinessLogic.DomainModel
             AccumulativeRules=new List<PriceRule>();
         }
 
-        public string ShortName{ get; set; }
         public string DiscountDescription{ get; set; }
         public string NewsLine{ get; set; }
         public string Contacts{ get; set; }
@@ -51,7 +48,9 @@ namespace DiscontMD.BusinessLogic.DomainModel
         }
 
         [DBField(SqlDbType.NVarChar, 128)]
-        public string DomainKeyword{ get; set; }
+        public string Domain{ get; set; }
+        [DBField(SqlDbType.NVarChar, 256)]
+        public string Name{ get; set; }
 
         [DBField(SqlDbType.NVarChar, 0, false, true, typeof(StoreSettings))]
         public StoreSettings Settings { get; set; }

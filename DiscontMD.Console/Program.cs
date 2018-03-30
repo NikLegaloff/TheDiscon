@@ -64,7 +64,7 @@ namespace DiscontMD.Console
         {
             Store store = new Store
             {
-                DomainKeyword = "avtomoika"
+                Domain= "avtomoika"
             };
 
             store.Settings.AccumulativeRules = new List<PriceRule>
@@ -76,7 +76,7 @@ namespace DiscontMD.Console
                 new PriceRule {From = 10000, Discount = 7},
             };
             store.Settings.Type = DiscountType.Accumulative;
-            store.Settings.ShortName = "Автомойка";
+            store.Name= "Автомойка";
             Registry.Current.Data.Stores.Save(store).Wait();
             Registry.Current.Services.Card.ActivateCard(111111, "Николай", "niklegaloff@gmail.com").Wait();
         }

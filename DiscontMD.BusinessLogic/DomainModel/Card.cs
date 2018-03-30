@@ -50,13 +50,16 @@ namespace DiscontMD.BusinessLogic.DomainModel
 
         [DBField(SqlDbType.Int)]
         public int Num{ get; set; }
+        
         [DBField(SqlDbType.UniqueIdentifier)]
         public Guid StoreId { get; set; }
 
         [DBField(SqlDbType.NVarChar, 0, false, true, typeof(CardData))]
         public CardData Data { get; set; }
         private string DataJSON { get; set; }
+
         public Task<Store> Store => Registry.Current.Data.Stores.Find(StoreId);
+
         public int CompareTo(Card other)
         {
             return -Data.ActivationDate.CompareTo(other.Data.ActivationDate);

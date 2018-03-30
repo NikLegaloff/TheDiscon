@@ -50,7 +50,8 @@ namespace DiscontMD.BusinessLogic.Service
         {
             var s = Registry.Current.Infrastructure.Common.GetFromSession(SessionKey) as string;
             //if (string.IsNullOrWhiteSpace(s)) HttpContext.Current.Response.Redirect("/Account/Login/");
-            return AsyncHelpers.RunSync(() => Registry.Current.Data.Users.Find(new Guid(s)));
+            var currentUser = AsyncHelpers.RunSync(() => Registry.Current.Data.Users.Find(new Guid(s)));
+            return currentUser;
         }
 
     }

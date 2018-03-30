@@ -127,6 +127,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Code\AuthHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BackofficeController.cs" />
     <Compile Include="Controllers\DiscontController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -267,6 +268,8 @@
     <Content Include="Views\Backoffice\CreateStore.cshtml" />
     <Content Include="Views\Backoffice\ActivateCard.cshtml" />
     <Content Include="Views\Backoffice\ListActive.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\SelectStore.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

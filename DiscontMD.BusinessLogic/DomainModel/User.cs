@@ -20,6 +20,6 @@ namespace DiscontMD.BusinessLogic.DomainModel
 
     }
 
-    public enum UserRole { Admin, User }
+    public enum UserRole {Superuser, Admin, User }
 
 }

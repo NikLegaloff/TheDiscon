@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Dynamic;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Dapper;
 using DiscontMD.BusinessLogic;
 using DiscontMD.BusinessLogic.DomainModel;
+using DiscontMD.BusinessLogic.Presistense;
 using DiscontMD.BusinessLogic.Presistense.MSSQL;
 using DiscontMD.BusinessLogic.Service;
 using DiscontMD.WebUI.Models;
@@ -107,16 +109,24 @@ namespace DiscontMD.WebUI.Controllers
             return View(list);
         }
         [AcceptVerbs(HttpVerbs.Get)]
-        public async Task<ActionResult> CreateStore()
+        public async Task<ActionResult> CreateStore(string error = null)
         {
-            return View();
+            dynamic model = new ExpandoObject();
+            model.Error = error;
+            return View(model);
         }
         [AcceptVerbs(HttpVerbs.Post)]
         public async Task<ActionResult> CreateStore(string name, string domain, int type,int everyN, PriceRulesDto prices)
         {
-            Store store = new Store {DomainKeyword = domain};
+            var byDomain = await Registry.Current.Data.Stores.Select(" where domain=@domain", new { domain });
+            if (byDomain != null && byDomain.Length > 0) return RedirectToAction("CreateStore", new {error = "Доменное имя '" + domain + "' занято"});
+
+            byDomain = await Registry.Current.Data.Stores.Select(" where name=@name", new { name});
+            if (byDomain != null && byDomain.Length > 0) return RedirectToAction("CreateStore", new {error = "Имя сайта '" + name + "' занято"});
+
+            Store store = new Store {Domain= domain};
             store.Settings.Type = (DiscountType)type;
-            store.Settings.ShortName = name;
+            store.Name = name;
             if (store.Settings.Type == DiscountType.EveryNForFree) store.Settings.EneryN = everyN;
             else
             {
@@ -138,6 +148,11 @@ namespace DiscontMD.WebUI.Controllers
             currentUser.StoreId = store.Id;
             await Registry.Current.Data.Users.Save(currentUser);
             return RedirectToAction("Index");
+        }
+
+        public async Task<ActionResult> CheckDomainName(string domainName)
+        {
+            return null;
         }
     }
 }
