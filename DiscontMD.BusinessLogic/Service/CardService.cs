@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using DiscontMD.BusinessLogic.DomainModel;
 
@@ -13,21 +14,22 @@ namespace DiscontMD.BusinessLogic.Service
             return cards[0];
         }
 
-        public async Task AssignPackToStore(int count, Guid storeId)
+        public  void AssignPackToStore(int count, Guid storeId)
         {
-            var packs = await Registry.Current.Data.CardPacks.Select(" where storeId is null", null, count);
+            var packs = AsyncHelpers.RunSync(() => Registry.Current.Data.CardPacks.Select(" where storeId is null", null, count));
             foreach (var pack in packs)
             {
                 for (int i = 0; i < 100; i++)
                 {
-                    Registry.Current.Data.AvailableCards.Save(new AvailableCard
+                    var card = new AvailableCard
                     {
                         StoreId = storeId,
                         Num = pack.NumBase * 100 + i
-                    }).Wait();
-                    pack.StoreId=storeId;
-                    await Registry.Current.Data.CardPacks.Save(pack);
+                    };
+                    AsyncHelpers.RunSync(() => Registry.Current.Data.AvailableCards.Save(card));
                 }
+                pack.StoreId = storeId;
+                AsyncHelpers.RunSync(() => Registry.Current.Data.CardPacks.Save(pack));
             }
         }
         public async Task<ActivationCardResult> ActivateCard(int num, string name, string addreds)

@@ -34,13 +34,10 @@
                 }
             </div>
             <div class="col-md-3 mb-4">
-                @using (Html.BeginForm("ActivateCard", "Backoffice"))
-                {
                     <h5>Дисконтные карты</h5>
                     <div class="mb-1 lead">Активные <a class="font-weight-bold" href="/Backoffice/ListActive/">@Model.ActiveCards <i class="fa fa-angle-double-right"></i></a></div>
-                    <div  class="mb-1 lead">Неактивированные <a class="font-weight-bold" href="#">@Model.AvailableCards <i class="fa fa-angle-double-right"></i></a></div>
+                    <div  class="mb-1 lead">Неактивированные <a class="font-weight-bold" href="/Backoffice/ListNotActive/">@Model.AvailableCards <i class="fa fa-angle-double-right"></i></a></div>
                     <div class="mb-1 lead">Всего карт <a class="font-weight-bold">@Model.Total</a></div>
-                }
             </div>
             <div class="col-md-3 mb-4">
                 @using (Html.BeginForm("ActivateCard", "Backoffice"))

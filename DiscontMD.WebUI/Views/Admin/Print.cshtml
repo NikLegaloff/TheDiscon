@@ -1,0 +1,48 @@
+﻿@model dynamic
+@{
+    ViewBag.Title = "Мой офис";
+
+}
+<div class="my-3 p-3 bg-white rounded box-shadow">
+    <div class="pt-3">
+       <div class="row">
+            <div class="col-md-12  mb-4">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                 <th scope="col">Номер</th>
+                                <th scope="col">Домен</th>
+                                <th scope="col">Имя магазина</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var row in Model)
+                            {
+                                <tr>
+                                    <td>@(((string)row.NumBase.ToString()).Insert(3," "))XX</td>
+                                    <td>@(row.Domain).diskont-md.com</td>
+                                    <td>@row.Name</td>
+                                    <td>
+                                        @if (!row.Prepared)
+                                        {
+                                            using (Html.BeginForm("DoPrint", "Admin", FormMethod.Get))
+                                            {
+                                                <input type="hidden" value="@row.Id" name="id"/>
+                                                <input type="submit" class="btn btn-outline-primary" value="Подготовить документы"/>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <a href="/Img/Pack/@(row.NumBase).zip" class="btn btn-outline-success btn-block" target="_blank">Скачать</a>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                            
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+    </div>
+</div>

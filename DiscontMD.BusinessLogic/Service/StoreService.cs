@@ -45,5 +45,7 @@ namespace DiscontMD.BusinessLogic.Service
             var amount = card.Data.Amount;
             return store.Settings.AccumulativeRules.Max(r => r.From <= amount ? r.Discount : 0);
         }
+
+        public string CurrentStoreName => AsyncHelpers.RunSync(CurrentStore).Name;
     }
 }

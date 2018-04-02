@@ -1,48 +1,44 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using DiscontMD.BusinessLogic;
+using DiscontMD.BusinessLogic.Bus;
+using DiscontMD.BusinessLogic.Bus.Commands;
 using DiscontMD.BusinessLogic.DomainModel;
-using DiscontMD.BusinessLogic.Infrastr;
 
 namespace DiscontMD.Console
 {
-    public class ConsoleCommonInfrastructureProvider : ICommonInfrastructureProvider
-    {
-        readonly Dictionary<string,object> _identityMap = new Dictionary<string, object>();
-        readonly Dictionary<string,object> _session = new Dictionary<string, object>();
-        public object GetFromSession(string key)
-        {
-            return _session;
-        }
-
-        public void PutInSession(string key, object subj)
-        {
-            _session.Add(key, subj);
-        }
-
-        public IDictionary IdentityMap => _identityMap;
-        public string CurrentDomainName()
-        {
-            return "http://avtomoika.diskont-md.com";
-        }
-    }
-
     class Program
     {
         static void  Main(string[] args)
         {
             Registry.Init(new ConsoleCommonInfrastructureProvider());
 
-            Do3();
+            AsyncHelpers.RunSync(Print);
+            //ProcessCommands();
+        }
+
+        private static async Task Print()
+        {
+            var printPagesPackCommandHandler = new PrintPagesPackCommandHandler(Guid.Empty);
+            await printPagesPackCommandHandler.Process(new PrintPagesPackCommand(new Guid("F4273903-9798-4B28-BD54-001772498FBB")));
+        }
+        private static void ProcessCommands()
+        {
+            do
+            {
+                var result = new CommandExecutor(System.Console.WriteLine).TakeOneAndExecute().Result;
+                // if nothing processed
+                if (!result) Thread.Sleep(2000); // then sleep 2 sec
+            } while (true);
         }
 
         private static void Do3()
         {
-            Registry.Current.Services.Card.AssignPackToStore(1, new Guid("BF1A81D8-BA91-46AA-82EB-973586485A44")).Wait();
+            Registry.Current.Services.Card.AssignPackToStore(1, new Guid("BF1A81D8-BA91-46AA-82EB-973586485A44"));
         }
         private static void Do2()
         {
@@ -57,7 +53,7 @@ namespace DiscontMD.Console
             int[] MyRandomArray2 = MyRandomArray.OrderBy(x => rnd.Next()).ToArray();
             foreach (var i in MyRandomArray2)
             {
-                Registry.Current.Data.CardPacks.Save(new CardPack {NumBase = i}).Wait();
+                Registry.Current.Data.CardPacks.Save(new CardPack {NumBase = i,Printed = false}).Wait();
             }
         }
         private static void Do1()

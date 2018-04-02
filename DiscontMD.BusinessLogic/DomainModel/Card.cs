@@ -50,7 +50,8 @@ namespace DiscontMD.BusinessLogic.DomainModel
 
         [DBField(SqlDbType.Int)]
         public int Num{ get; set; }
-        
+        public string FormattedNum => Num.ToString().Insert(3, "&nbsp;");
+
         [DBField(SqlDbType.UniqueIdentifier)]
         public Guid StoreId { get; set; }
 

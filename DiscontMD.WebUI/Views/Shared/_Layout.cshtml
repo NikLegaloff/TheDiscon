@@ -43,6 +43,7 @@
                             <div class="dropdown-menu" aria-labelledby="ddlMenu1">
                                 <a class="dropdown-item" href="/Admin/">Главная</a>
                                 <a class="dropdown-item" href="/Admin/SelectStore/">Сменить магазин</a>
+                                <a class="dropdown-item" href="/Admin/Print/">Для печати</a>
                             </div>
                         </li>
 
@@ -73,7 +74,10 @@ else
             }
         </li>
 
-
+        @if (Registry.Current.Services.User.CurrentUser().StoreId != null)
+        {
+            <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-shopping-cart"></i> @Registry.Current.Services.Store.CurrentStoreName</a></li>
+        }
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="ddlMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> @(Registry.Current.Services.User.CurrentUser().Email.Split('@')[0])</a>
             <div class="dropdown-menu" aria-labelledby="ddlMenu1">

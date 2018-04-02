@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Dynamic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Dapper;
@@ -94,18 +95,20 @@ namespace DiscontMD.WebUI.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
+        public async Task<ActionResult> ListNotActive()
+        {
+            var storeId = Registry.Current.Services.User.CurrentUser().StoreId.Value;
+            var list = await Registry.Current.Data.AvailableCards.Select(" where storeId=@storeId order by num", new { storeId });
+            return View(list?.ToArray());
+        }
+
+        [AcceptVerbs(HttpVerbs.Get)]
         public async Task<ActionResult> ListActive()
         {
             var storeId = Registry.Current.Services.User.CurrentUser().StoreId.Value;
 
-            var list = await Registry.Current.Data.Cards.Select(" where storeId=@storeId", new {storeId});
+            var list = await Registry.Current.Data.Cards.Select(" where storeId=@storeId order by num desc", new {storeId});
 
-            if (list != null)
-            {
-                var tmp = new List<Card>(list);
-                tmp.Sort();
-                list = tmp.ToArray();
-            }
             return View(list);
         }
         [AcceptVerbs(HttpVerbs.Get)]

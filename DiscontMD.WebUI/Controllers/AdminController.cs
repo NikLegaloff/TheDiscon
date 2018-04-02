@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using Dapper;
 using DiscontMD.BusinessLogic;
+using DiscontMD.BusinessLogic.Bus.Commands;
 using DiscontMD.BusinessLogic.DomainModel;
 using DiscontMD.BusinessLogic.Presistense.MSSQL;
 using DiscontMD.WebUI.Models;
@@ -33,10 +34,57 @@ namespace DiscontMD.WebUI.Controllers
 
 
 
+        [AcceptVerbs(HttpVerbs.Get)]
         public async Task<ActionResult> SelectStore()
         {
             Store[] stores = await Registry.Current.Data.Stores.Select();
             return View(stores);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public async Task<ActionResult> SelectStore(Guid storeId)
+        {
+            var currentUser = Registry.Current.Services.User.CurrentUser();
+            currentUser.StoreId=storeId;
+            await Registry.Current.Data.Users.Save(currentUser);
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult AddCards(int count)
+        {
+            var storeId = Registry.Current.Services.User.CurrentUser().StoreId;
+            if (storeId != null) Registry.Current.Services.Card.AssignPackToStore(count, storeId.Value);
+            else throw new Exception("No current store set");
+            return RedirectToAction("Index");
+        }
+
+        [AcceptVerbs(HttpVerbs.Get)]
+        public async Task<ActionResult> Print()
+        {
+            using (var connection = MSSqlDb.Open())
+            {
+                var result = await connection.QueryAsync("select cp.Id, cp.NumBase, Domain, Name, cp.Prepared from CardPack cp join Store s on cp.StoreId=s.Id where cp.StoreId is not null and cp.Printed=0 order by Domain, NumBase");
+                return View(result);
+            }
+        }
+
+        [AcceptVerbs(HttpVerbs.Get)]
+        public async Task<ActionResult> DoAction()
+        {
+            return RedirectToAction("Print");
+        }
+
+        [AcceptVerbs(HttpVerbs.Get)]
+        public async Task<ActionResult> DoPrint(Guid id)
+        {
+            AsyncHelpers.RunSync(() => PrintMe(id));
+            return RedirectToAction("Print");
+        }
+
+        private static async Task PrintMe(Guid id)
+        {
+            var printPagesPackCommandHandler = new PrintPagesPackCommandHandler(Guid.Empty);
+            await printPagesPackCommandHandler.Process(new PrintPagesPackCommand(id));
         }
 
     }

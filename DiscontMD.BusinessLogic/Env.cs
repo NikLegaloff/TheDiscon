@@ -6,7 +6,7 @@ namespace DiscontMD.BusinessLogic
     {
         private EnvType _type;
 
-        public Env(EnvType type)
+        public Env()
         {
             var lower = AppDomain.CurrentDomain.BaseDirectory.ToLower();
             if (lower.Contains("prerelease")) _type = EnvType.Prerelease;
@@ -14,6 +14,10 @@ namespace DiscontMD.BusinessLogic
             else _type = EnvType.Dev;
         }
 
+        public string ImagesPath
+        {
+            get { return "J:\\Projects\\DiscontMD\\DiscontMD.WebUI\\Img\\Pack\\"; }
+        }
         public string MsSqlConnectionString
         {
             get

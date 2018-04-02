@@ -28,7 +28,7 @@ namespace DiscontMD.BusinessLogic
         public static void Init(ICommonInfrastructureProvider commonInfrastructureProvider)
         {
             _current = new Registry();
-            _current.Env = new Env(EnvType.Dev);
+            _current.Env = new Env();
             _current.Infrastructure = new Infrastructure(commonInfrastructureProvider);
             _current.Services = Services.Create();
             _current.Data = new DataProviders();

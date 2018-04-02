@@ -12,24 +12,31 @@
                     <h5>Добавить карты</h5>
                     <div style="margin-bottom: 20px;">
                         Количество, х100<br/>
-                        <input  required="true"  class="form-control form-control-lg" type="number" maxlength="6" max="999999"  name="count"/>
+                        <input  required="true"  class="form-control form-control-lg numberbox" type="number" value="1" max="9999"  name="count"/>
                     </div>
                     <div style="margin-bottom: 20px;">
                         <input type="submit" class="btn btn-block btn-outline-success" value="Добавить"/>
                     </div>
                 }
             </div>
-            <div class="col-md-3 mb-4">
-                @using (Html.BeginForm("ActivateCard", "Backoffice"))
-                {
-                    <h5>Управление сайтом</h5>
-                    <div class="list-group">
-                            <a href="/Backoffice/EditStore/" class="list-group-item list-group-item-action">Анонс и контакты</a>
-                            <a href="#" class="list-group-item list-group-item-action disabled">Внешний вид</a>
+           <div class="col-md-3 mb-4">
+               @using (Html.BeginForm("ActivateCard", "Backoffice"))
+               {
+                   <h5>Управление сайтом</h5>
+                   <div class="list-group">
+                       <a href="/Backoffice/EditStore/" class="list-group-item list-group-item-action">Анонс и контакты</a>
+                       <a href="#" class="list-group-item list-group-item-action disabled">Внешний вид</a>
                         
-                    </div>
-                }
-            </div>
+                   </div>
+               }
+           </div>
+           <div class="col-md-3 mb-4">
+               <h5>Дисконтные карты</h5>
+               <div class="mb-1 lead">Активные <a class="font-weight-bold" href="/Backoffice/ListActive/">@Model.ActiveCards <i class="fa fa-angle-double-right"></i></a></div>
+               <div class="mb-1 lead">Неактивированные <a class="font-weight-bold" href="/Backoffice/ListNotActive/">@Model.AvailableCards <i class="fa fa-angle-double-right"></i></a></div>
+               <div class="mb-1 lead">Всего карт <a class="font-weight-bold">@Model.Total</a></div>
+           </div>
+
         </div>
     </div>
 </div>

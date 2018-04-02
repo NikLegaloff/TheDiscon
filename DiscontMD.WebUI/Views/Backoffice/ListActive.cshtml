@@ -29,7 +29,7 @@
                         {
                             <tr>
                                 <th scope="row">@(i--)</th>
-                                <td><a href="/Backoffice/ViewCard?cardNum=@row.Num">@row.Num</a></td>
+                                <td><a href="/Backoffice/ViewCard?cardNum=@row.Num">@Html.Raw(row.FormattedNum)</a></td>
                                 <td>@row.Data.ActivationDate.ToShortDateString() @row.Data.ActivationDate.ToShortTimeString()</td>
                                 <td>@row.Data.Amount</td>
                                 <td>@Registry.Current.Services.Store.DiscountFor(row)%</td>

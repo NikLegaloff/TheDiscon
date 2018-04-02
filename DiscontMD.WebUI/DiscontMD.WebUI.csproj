@@ -270,6 +270,8 @@
     <Content Include="Views\Backoffice\ListActive.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\SelectStore.cshtml" />
+    <Content Include="Views\Backoffice\ListNotActive.cshtml" />
+    <Content Include="Views\Admin\Print.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
