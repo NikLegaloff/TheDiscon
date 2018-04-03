@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -83,9 +84,14 @@ namespace DiscontMD.WebUI.Controllers
             return View(viewCardResult);
         }
 
-        public ActionResult UpdateCardDetails()
+        public async Task<ActionResult> UpdateCardDetails(Guid id, string name, string email, string comment)
         {
-            throw new System.NotImplementedException();
+            var card = await Registry.Current.Data.Cards.Find(id);
+            card.Data.ContactName = name;
+            card.Data.ContactAddress = email;
+            card.Data.Comments = comment;
+            await Registry.Current.Data.Cards.Save(card);
+            return RedirectToAction("ViewCard", new { cardNum = card.Num });
         }
 
         public async Task<ActionResult> AddTransaction(int cardNum, decimal amount, string comment)

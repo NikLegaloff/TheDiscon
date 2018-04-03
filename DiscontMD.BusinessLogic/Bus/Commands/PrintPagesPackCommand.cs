@@ -74,8 +74,6 @@ namespace DiscontMD.BusinessLogic.Bus.Commands
                                 {
                                     g.DrawImage(qr, ax,ay);
                                 }
-
-
                                 num++;
                             }
                         var parameters = new EncoderParameters(1);

@@ -47,6 +47,7 @@
         <div class="col-md-3 offset-md-1  mb-4">
             @using (Html.BeginForm("UpdateCardDetails", "Backoffice"))
             {
+                <input type="hidden" name="id" value="@Model.Card.Id" />
                 <h5>Личные данные</h5>
                 <div style="margin-bottom: 20px;">
                     Имя владельца<br/>
@@ -58,10 +59,10 @@
                 </div>
                 <div style="margin-bottom: 20px;">
                     Заметки<br/>
-                    <textarea class="form-control" name="comment" type="text">@Model.Card.Data.Comments</textarea>
+                    <textarea class="form-control" name="comment" rows="4" type="text">@Model.Card.Data.Comments</textarea>
                 </div>
                 <div style="margin-bottom: 20px;">
-                    <input type="submit" onclick="return confirm('Автивировать карту?')" class="btn btn-block btn-outline-success" value="Сохранить изменения"/>
+                    <input type="submit" class="btn btn-block btn-outline-secondary" value="Сохранить изменения"/>
                 </div>
             }
         </div>

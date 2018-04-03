@@ -75,6 +75,15 @@ namespace DiscontMD.WebUI.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
+        public async Task<ActionResult> PrintHide(Guid id)
+        {
+            var pack = await Registry.Current.Data.CardPacks.Find(id);
+            pack.Printed = true;
+            await Registry.Current.Data.CardPacks.Save(pack);
+            return RedirectToAction("Print");
+        }
+
+        [AcceptVerbs(HttpVerbs.Get)]
         public async Task<ActionResult> DoPrint(Guid id)
         {
             AsyncHelpers.RunSync(() => PrintMe(id));

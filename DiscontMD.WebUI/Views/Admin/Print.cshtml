@@ -34,7 +34,10 @@
                                         }
                                         else
                                         {
-                                            <a href="/Img/Pack/@(row.NumBase).zip" class="btn btn-outline-success btn-block" target="_blank">Скачать</a>
+                                            <div>
+                                                <a href="/Img/Pack/@(row.NumBase).zip" class="btn btn-outline-success" target="_blank">Скачать</a> &nbsp;
+                                                <a href="/Admin/PrintHide?id=@(row.Id)" class="btn btn-outline-warning">Скрыть</a>
+                                            </div>
                                         }
                                     </td>
                                 </tr>
